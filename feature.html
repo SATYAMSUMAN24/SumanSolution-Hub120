@@ -1,0 +1,768 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Features - Suman Solution | Why Choose Us</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- AI Assistant Styles -->
+    <link href="css/ai-assistant.css" rel="stylesheet">
+
+    <style>
+        .feature-card {
+            background: linear-gradient(135deg, #fff 0%, #f8f9ff 100%);
+            border: 1px solid rgba(53, 94, 252, 0.1);
+            border-radius: 20px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(53, 94, 252, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(53, 94, 252, 0.2);
+            border-color: var(--primary);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--primary), #667eea);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: rotateY(180deg) scale(1.1);
+            box-shadow: 0 15px 30px rgba(53, 94, 252, 0.3);
+        }
+
+        .feature-icon i {
+            font-size: 2rem;
+            color: white;
+            transition: all 0.4s ease;
+        }
+
+        .stats-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 25px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.6s ease;
+        }
+
+        .stats-card:hover::before {
+            top: -25%;
+            right: -25%;
+            transform: scale(1.2);
+        }
+
+        .benefit-item {
+            padding: 1.5rem;
+            background: white;
+            border-radius: 15px;
+            border-left: 4px solid var(--primary);
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .benefit-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 25px rgba(53, 94, 252, 0.15);
+            border-left-width: 6px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 1rem;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary), transparent);
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 1rem;
+            width: 1rem;
+            height: 1rem;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px rgba(53, 94, 252, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Navbar Start -->
+    <div class="container-fluid fixed-top px-0 wow fadeIn" data-wow-delay="0.1s">
+        <div class="top-bar row gx-0 align-items-center d-none d-lg-flex">
+            <div class="col-lg-6 px-5 text-start">
+                <small><i class="fa fa-map-marker-alt text-primary me-2"></i>Patna, Bihar, India</small>
+                <small class="ms-4"><i class="fa fa-clock text-primary me-2"></i>9.00 am - 9.00 pm</small>
+            </div>
+            <div class="col-lg-6 px-5 text-end">
+                <small><i class="fa fa-envelope text-primary me-2"></i>satyamsuman2003@gmail.com</small>
+                <small class="ms-4"><i class="fa fa-phone-alt text-primary me-2"></i>+91 8227027353</small>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-expand-lg navbar-light py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
+            <a href="index.html" class="navbar-brand ms-4 ms-lg-0">
+                <div class="logo-container">
+                    <div class="logo-icon"></div>
+                    <div class="logo-text">
+                        <div class="logo-title">SATYAM SUMAN</div>
+                    </div>
+                </div>
+            </a>
+            <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto p-4 p-lg-0">
+                    <a href="index.html" class="nav-item nav-link">Home</a>
+                    <a href="about.html" class="nav-item nav-link">About</a>
+                    <a href="service.html" class="nav-item nav-link">Services</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle active" data-bs-toggle="dropdown">Pages</a>
+                        <div class="dropdown-menu border-light m-0">
+                            <a href="project.html" class="dropdown-item">Projects</a>
+                            <a href="feature.html" class="dropdown-item active">Features</a>
+                            <a href="team.html" class="dropdown-item">Team Member</a>
+                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                            <a href="join-us.html" class="dropdown-item">Join Us</a>
+                            <a href="blog.html" class="dropdown-item">Blog</a>
+                        </div>
+                    </div>
+                    <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    <a href="admin-login.html" class="nav-item nav-link text-primary fw-bold">Admin</a>
+                </div>
+                <div class="d-none d-lg-flex ms-2">
+                    <a class="btn btn-light btn-sm-square rounded-circle ms-3" href="https://github.com/SATYAMSUMAN24" target="_blank">
+                        <small class="fab fa-github text-primary"></small>
+                    </a>
+                    <a class="btn btn-light btn-sm-square rounded-circle ms-3" href="https://www.instagram.com/satyamsuman6349/" target="_blank">
+                        <small class="fab fa-instagram text-primary"></small>
+                    </a>
+                    <a class="btn btn-light btn-sm-square rounded-circle ms-3" href="https://www.linkedin.com/in/satyamsuman2003/" target="_blank">
+                        <small class="fab fa-linkedin-in text-primary"></small>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header mb-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container">
+            <h1 class="display-3 mb-4 animated slideInDown">Why Choose Us</h1>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Features</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+    <!-- Features Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 700px;">
+                <span class="d-inline-block bg-primary text-white rounded-pill py-2 px-4 mb-3 fw-semibold">Why Suman Solution</span>
+                <h1 class="display-4 mb-4 fw-bold">Exceptional Features That Set Us Apart</h1>
+                <p class="lead text-muted">Discover the innovative solutions and cutting-edge technologies that make Suman Solution your trusted partner for digital transformation</p>
+            </div>
+
+            <!-- Core Features Grid -->
+            <div class="row g-4 mb-5" data-wow-delay="0.3s">
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card h-100 p-0 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=200&fit=crop&crop=entropy&cs=tinysrgb" class="card-img-top" alt="Lightning Fast Delivery" style="height: 200px; object-fit: cover;">
+                        <div class="p-4 text-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <h4 class="mb-3 fw-bold">Lightning Fast Delivery</h4>
+                            <p class="text-muted mb-4">We deliver projects 40% faster than industry standards without compromising quality through our agile methodology and automated workflows.</p>
+                            <div class="d-flex justify-content-center">
+                                <span class="badge bg-success me-2">Agile Process</span>
+                                <span class="badge bg-info">24/7 Support</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card h-100 p-0 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=200&fit=crop&crop=entropy&cs=tinysrgb" class="card-img-top" alt="Enterprise Security" style="height: 200px; object-fit: cover;">
+                        <div class="p-4 text-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h4 class="mb-3 fw-bold">Enterprise Security</h4>
+                            <p class="text-muted mb-4">Bank-grade security protocols, end-to-end encryption, and compliance with international standards ensure your data is always protected.</p>
+                            <div class="d-flex justify-content-center">
+                                <span class="badge bg-danger me-2">SSL Secured</span>
+                                <span class="badge bg-warning">GDPR Compliant</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card h-100 p-0 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=200&fit=crop&crop=entropy&cs=tinysrgb" class="card-img-top" alt="AI-Powered Solutions" style="height: 200px; object-fit: cover;">
+                        <div class="p-4 text-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h4 class="mb-3 fw-bold">AI-Powered Solutions</h4>
+                            <p class="text-muted mb-4">Leverage machine learning and artificial intelligence to automate processes, predict trends, and make data-driven decisions.</p>
+                            <div class="d-flex justify-content-center">
+                                <span class="badge bg-primary me-2">ML Models</span>
+                                <span class="badge bg-secondary">Predictive Analytics</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card h-100 p-0 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=200&fit=crop&crop=entropy&cs=tinysrgb" class="card-img-top" alt="Mobile-First Design" style="height: 200px; object-fit: cover;">
+                        <div class="p-4 text-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h4 class="mb-3 fw-bold">Mobile-First Design</h4>
+                            <p class="text-muted mb-4">Responsive designs that look perfect on any device. Progressive Web Apps ensure fast loading and native app experience.</p>
+                            <div class="d-flex justify-content-center">
+                                <span class="badge bg-success me-2">PWA Ready</span>
+                                <span class="badge bg-info">Cross Platform</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card h-100 p-0 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=200&fit=crop&crop=entropy&cs=tinysrgb" class="card-img-top" alt="Real-time Analytics" style="height: 200px; object-fit: cover;">
+                        <div class="p-4 text-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h4 class="mb-3 fw-bold">Real-time Analytics</h4>
+                            <p class="text-muted mb-4">Get instant insights with live dashboards, automated reporting, and predictive analytics to make informed business decisions.</p>
+                            <div class="d-flex justify-content-center">
+                                <span class="badge bg-warning me-2">Live Data</span>
+                                <span class="badge bg-success">Auto Reports</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card h-100 p-0 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop&crop=entropy&cs=tinysrgb" class="card-img-top" alt="Scalable Architecture" style="height: 200px; object-fit: cover;">
+                        <div class="p-4 text-center">
+                            <div class="feature-icon">
+                                <i class="fas fa-cogs"></i>
+                            </div>
+                            <h4 class="mb-3 fw-bold">Scalable Architecture</h4>
+                            <p class="text-muted mb-4">Cloud-native solutions that grow with your business. Microservices architecture ensures reliability and performance at any scale.</p>
+                            <div class="d-flex justify-content-center">
+                                <span class="badge bg-primary me-2">Cloud Native</span>
+                                <span class="badge bg-secondary">Auto Scaling</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <div class="row g-4 mb-5">
+                <div class="col-lg-3 col-md-6">
+                    <div class="stats-card text-center p-4 h-100">
+                        <h2 class="display-4 fw-bold mb-2">50+</h2>
+                        <p class="mb-0 fs-5">Projects Completed</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stats-card text-center p-4 h-100">
+                        <h2 class="display-4 fw-bold mb-2">98%</h2>
+                        <p class="mb-0 fs-5">Client Satisfaction</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stats-card text-center p-4 h-100">
+                        <h2 class="display-4 fw-bold mb-2">2+</h2>
+                        <p class="mb-0 fs-5">Years Experience</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stats-card text-center p-4 h-100">
+                        <h2 class="display-4 fw-bold mb-2">24/7</h2>
+                        <p class="mb-0 fs-5">Support Available</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Benefits Section -->
+            <div class="row">
+                <div class="col-lg-6">
+                    <h3 class="mb-4 fw-bold">Why Businesses Choose Us</h3>
+                    
+                    <div class="benefit-item">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle text-success fs-4 me-3"></i>
+                            <div>
+                                <h5 class="mb-1 fw-semibold">Cost-Effective Solutions</h5>
+                                <p class="mb-0 text-muted">Get premium quality at competitive prices with transparent pricing</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="benefit-item">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle text-success fs-4 me-3"></i>
+                            <div>
+                                <h5 class="mb-1 fw-semibold">Expert Team</h5>
+                                <p class="mb-0 text-muted">Certified professionals with years of industry experience</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="benefit-item">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle text-success fs-4 me-3"></i>
+                            <div>
+                                <h5 class="mb-1 fw-semibold">Continuous Support</h5>
+                                <p class="mb-0 text-muted">Ongoing maintenance and updates to keep your solution current</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="benefit-item">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-check-circle text-success fs-4 me-3"></i>
+                            <div>
+                                <h5 class="mb-1 fw-semibold">Future-Proof Technology</h5>
+                                <p class="mb-0 text-muted">Latest technologies that adapt to future business needs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <h3 class="mb-4 fw-bold">Our Development Process</h3>
+                    
+                    <div class="timeline-item">
+                        <h5 class="fw-semibold mb-2">Discovery & Planning</h5>
+                        <p class="text-muted mb-0">Understanding your requirements and creating a comprehensive project roadmap</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h5 class="fw-semibold mb-2">Design & Prototype</h5>
+                        <p class="text-muted mb-0">Creating wireframes, mockups, and interactive prototypes for validation</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h5 class="fw-semibold mb-2">Development & Testing</h5>
+                        <p class="text-muted mb-0">Agile development with continuous testing and quality assurance</p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <h5 class="fw-semibold mb-2">Deploy & Support</h5>
+                        <p class="text-muted mb-0">Seamless deployment with ongoing monitoring and support</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="text-center p-5 rounded-4" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <h3 class="text-white mb-3 fw-bold">Ready to Transform Your Business?</h3>
+                        <p class="text-white mb-4 fs-5">Let's discuss how our innovative solutions can help you achieve your goals</p>
+                        <div class="d-flex justify-content-center gap-3">
+                            <a href="contact.html" class="btn btn-warning btn-lg px-4">Get Started Today</a>
+                            <a href="project.html" class="btn btn-outline-light btn-lg px-4">View Our Work</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Features End -->
+
+    <!-- Footer Start -->
+    <div class="container-fluid footer mt-5 text-light wow fadeIn" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <h3 class="mb-3">Satyam Suman</h3>
+                    <p class="mb-3">Full Stack Developer & Data Analytics Expert - Transforming ideas into digital reality with innovative solutions.</p>
+                    <div class="contact-info">
+                        <p class="d-flex align-items-center"><i class="fas fa-map-marker-alt me-3 text-warning"></i>Patna, Bihar, India</p>
+                        <p class="d-flex align-items-center"><i class="fas fa-phone-alt me-3 text-warning"></i>+91 8227027353</p>
+                        <p class="d-flex align-items-center"><i class="fas fa-envelope me-3 text-warning"></i>satyamsuman2003@gmail.com</p>
+                    </div>
+                    <div class="d-flex flex-wrap pt-2">
+                        <a class="btn btn-outline-light btn-social" href="https://github.com/SATYAMSUMAN24" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="https://www.linkedin.com/in/satyamsuman2003/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/satyamsuman6349/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="https://twitter.com/" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-3">Our Services</h5>
+                    <div class="footer-links">
+                        <a class="btn btn-link text-light" href="service.html"><i class="fas fa-chart-line me-2"></i>Data Analytics</a>
+                        <a class="btn btn-link text-light" href="service.html"><i class="fas fa-tachometer-alt me-2"></i>Business Intelligence</a>
+                        <a class="btn btn-link text-light" href="service.html"><i class="fas fa-database me-2"></i>Data Engineering</a>
+                        <a class="btn btn-link text-light" href="service.html"><i class="fas fa-robot me-2"></i>AI & ML</a>
+                        <a class="btn btn-link text-light" href="service.html"><i class="fas fa-code me-2"></i>Web Development</a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-3">Quick Links</h5>
+                    <div class="footer-links">
+                        <a class="btn btn-link text-light" href="index.html"><i class="fas fa-home me-2"></i>Home</a>
+                        <a class="btn btn-link text-light" href="about.html"><i class="fas fa-info-circle me-2"></i>About</a>
+                        <a class="btn btn-link text-light" href="contact.html"><i class="fas fa-phone me-2"></i>Contact</a>
+                        <a class="btn btn-link text-light" href="join-us.html"><i class="fas fa-users me-2"></i>Careers</a>
+                        <a class="btn btn-link text-light" href="blog.html"><i class="fas fa-blog me-2"></i>Blog</a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-3">Pages</h5>
+                    <div class="footer-links">
+                        <a class="btn btn-link text-light" href="project.html"><i class="fas fa-briefcase me-2"></i>Projects</a>
+                        <a class="btn btn-link text-light" href="feature.html"><i class="fas fa-star me-2"></i>Features</a>
+                        <a class="btn btn-link text-light" href="team.html"><i class="fas fa-users me-2"></i>Team</a>
+                        <a class="btn btn-link text-light" href="testimonial.html"><i class="fas fa-quote-left me-2"></i>Testimonials</a>
+                        <a class="btn btn-link text-light" href="terms-conditions.html"><i class="fas fa-file-contract me-2"></i>Terms & Conditions</a>
+                        <a class="btn btn-link text-light" href="privacy-policy.html"><i class="fas fa-shield-alt me-2"></i>Privacy Policy</a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-12">
+                    <div class="newsletter-section">
+                        <h5 class="mb-3">Newsletter</h5>
+                        <p class="mb-3">Stay updated with our latest insights and innovations.</p>
+                        <div class="position-relative">
+                            <input class="form-control w-100" type="email" placeholder="Your email" id="newsletter-email" aria-label="Email for newsletter">
+                            <button type="button" class="btn btn-warning position-absolute" onclick="subscribeNewsletter()" aria-label="Subscribe to newsletter">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p>&copy; 2025 <strong>Satyam Suman</strong>. All Rights Reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p>Designed with <i class="fas fa-heart text-danger"></i> by <a href="https://github.com/SATYAMSUMAN24" target="_blank" class="text-warning">SATYAM SUMAN</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-warning btn-lg-square rounded-circle back-to-top" aria-label="Back to top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+    <!-- Footer End -->
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+
+    <!-- Quick Navigation Widget -->
+    <div id="quick-nav" class="position-fixed" style="top: 50%; right: 20px; transform: translateY(-50%); z-index: 1050;">
+        <div class="bg-white rounded-3 shadow-lg p-2" style="width: 60px;">
+            <!-- Toggle Button -->
+            <button class="quick-nav-toggle d-flex align-items-center justify-content-center mb-2" 
+                    onclick="toggleQuickNav()" 
+                    title="Quick Navigation" 
+                    data-bs-toggle="tooltip">
+                <i class="fas fa-bars" id="quickNavIcon"></i>
+            </button>
+            
+            <!-- Navigation Menu -->
+            <div class="quick-nav-menu" id="quickNavMenu">
+                <div class="d-flex flex-column gap-2">
+                    <a href="index.html" class="btn btn-sm btn-outline-primary rounded-circle p-2" title="Home" data-bs-toggle="tooltip">
+                        <i class="fas fa-home"></i>
+                    </a>
+                    <a href="about.html" class="btn btn-sm btn-outline-primary rounded-circle p-2" title="About" data-bs-toggle="tooltip">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="service.html" class="btn btn-sm btn-outline-primary rounded-circle p-2" title="Services" data-bs-toggle="tooltip">
+                        <i class="fas fa-cogs"></i>
+                    </a>
+                    <a href="project.html" class="btn btn-sm btn-outline-primary rounded-circle p-2" title="Projects" data-bs-toggle="tooltip">
+                        <i class="fas fa-briefcase"></i>
+                    </a>
+                    <a href="feature.html" class="btn btn-sm btn-outline-warning rounded-circle p-2" title="Features" data-bs-toggle="tooltip">
+                        <i class="fas fa-star"></i>
+                    </a>
+                    <a href="team.html" class="btn btn-sm btn-outline-info rounded-circle p-2" title="Team" data-bs-toggle="tooltip">
+                        <i class="fas fa-users"></i>
+                    </a>
+                    <a href="testimonial.html" class="btn btn-sm btn-outline-success rounded-circle p-2" title="Testimonials" data-bs-toggle="tooltip">
+                        <i class="fas fa-quote-left"></i>
+                    </a>
+                    <a href="blog.html" class="btn btn-sm btn-outline-secondary rounded-circle p-2" title="Blog" data-bs-toggle="tooltip">
+                        <i class="fas fa-blog"></i>
+                    </a>
+                    <a href="contact.html" class="btn btn-sm btn-outline-danger rounded-circle p-2" title="Contact" data-bs-toggle="tooltip">
+                        <i class="fas fa-phone"></i>
+                    </a>
+                    
+                    <!-- Social Links -->
+                    <hr class="my-2">
+                    <a href="#" class="btn btn-sm btn-outline-success rounded-circle p-2" title="WhatsApp" data-bs-toggle="tooltip" onclick="window.open('https://wa.me/918227027353', '_blank')">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="#" class="btn btn-sm btn-outline-info rounded-circle p-2" title="Telegram" data-bs-toggle="tooltip" onclick="window.open('https://t.me/satyamsuman2003', '_blank')">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="#" class="btn btn-sm btn-outline-primary rounded-circle p-2" title="LinkedIn" data-bs-toggle="tooltip" onclick="window.open('https://www.linkedin.com/in/satyamsuman2003/', '_blank')">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="btn btn-sm btn-outline-dark rounded-circle p-2" title="GitHub" data-bs-toggle="tooltip" onclick="window.open('https://github.com/SATYAMSUMAN24', '_blank')">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    
+                    <!-- Utility Actions -->
+                    <hr class="my-2">
+                    <a href="#" class="btn btn-sm btn-outline-secondary rounded-circle p-2" title="Back to Top" data-bs-toggle="tooltip" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                        <i class="fas fa-arrow-up"></i>
+                    </a>
+                    <a href="join-us.html" class="btn btn-sm btn-outline-warning rounded-circle p-2" title="Join Us" data-bs-toggle="tooltip">
+                        <i class="fas fa-user-plus"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Navigation Functions -->
+    <script>
+        function toggleQuickNav() {
+            const menu = document.getElementById('quickNavMenu');
+            const icon = document.getElementById('quickNavIcon');
+            
+            if (menu.classList.contains('show')) {
+                menu.classList.remove('show');
+                icon.className = 'fas fa-bars';
+            } else {
+                menu.classList.add('show');
+                icon.className = 'fas fa-times';
+            }
+        }
+
+        // Newsletter subscription function
+        function subscribeNewsletter() {
+            const email = document.getElementById('newsletter-email').value;
+            if (email) {
+                // Add to localStorage
+                let newsletters = JSON.parse(localStorage.getItem('newsletterSubscriptions')) || [];
+                newsletters.push({
+                    email: email,
+                    timestamp: new Date().toISOString(),
+                    id: Date.now()
+                });
+                localStorage.setItem('newsletterSubscriptions', JSON.stringify(newsletters));
+                
+                alert('Thank you for subscribing to our newsletter!');
+                document.getElementById('newsletter-email').value = '';
+            } else {
+                alert('Please enter a valid email address.');
+            }
+        }
+    </script>
+
+    <!-- Flying rocket animation -->
+    <style>
+        .flying-rocket {
+            display: inline-block;
+            animation: fly 3s ease-in-out infinite;
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+
+        .brand-icon {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        @keyframes fly {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-10px) rotate(-5deg);
+            }
+            50% {
+                transform: translateY(-5px) rotate(5deg);
+            }
+            75% {
+                transform: translateY(-15px) rotate(-3deg);
+            }
+        }
+
+        .navbar-brand:hover .flying-rocket {
+            animation: launch 0.8s ease-out;
+        }
+
+        @keyframes launch {
+            0% {
+                transform: translateY(0px) scale(1);
+            }
+            50% {
+                transform: translateY(-30px) scale(1.2) rotate(10deg);
+            }
+            100% {
+                transform: translateY(0px) scale(1);
+            }
+        }
+
+        /* Responsive logo adjustments */
+        @media (max-width: 768px) {
+            .flying-rocket {
+                font-size: 1.2em;
+                margin-right: 8px;
+            }
+            .navbar-brand h1 {
+                font-size: 1.8rem !important;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .flying-rocket {
+                font-size: 1em;
+                margin-right: 6px;
+            }
+            .navbar-brand h1 {
+                font-size: 1.5rem !important;
+            }
+        }
+    </style>
+
+    <!-- AI Assistant -->
+    <script src="js/ai-assistant.js"></script>
+
+    <!-- Ensure AI Assistant is loaded -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!document.getElementById('ai-chat-widget')) {
+                console.log('Initializing AI Assistant...');
+                new AIAssistant();
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Suman Solution</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .sidebar {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            min-height: 100vh;
+        }
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+            padding: 0.75rem 1rem;
+            margin: 0.25rem 0;
+            border-radius: 8px;
+        }
+        .sidebar .nav-link:hover,
+        .sidebar .nav-link.active {
+            color: #fff;
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+        .content-area {
+            background-color: #f8f9fa;
+            min-height: 100vh;
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .table-responsive {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .btn-action {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            border-radius: 6px;
+        }
+
+        /* Enhanced Mobile Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: -280px;
+                width: 280px;
+                z-index: 1000;
+                transition: left 0.3s ease;
+                height: 100vh;
+                overflow-y: auto;
+            }
+            .sidebar.show {
+                left: 0;
+            }
+            .content-area {
+                margin-left: 0;
+                padding: 0.5rem !important;
+                width: 100%;
+            }
+            .mobile-toggle {
+                display: block !important;
+                z-index: 1001;
+            }
+            .card {
+                margin-bottom: 1rem;
+                border-radius: 12px;
+            }
+            .table-responsive {
+                font-size: 0.8rem;
+                overflow-x: auto;
+                border-radius: 8px;
+            }
+            .stat-card h3 {
+                font-size: 1.5rem;
+            }
+            .stat-card {
+                text-align: center;
+                margin-bottom: 1rem;
+                padding: 1rem !important;
+                min-height: 120px;
+            }
+            .btn-group {
+                display: flex;
+                flex-direction: row;
+                gap: 0.15rem;
+                justify-content: center;
+            }
+            .btn-action {
+                font-size: 0.7rem;
+                padding: 0.15rem 0.3rem;
+                min-width: 32px;
+            }
+            .modal-dialog {
+                margin: 0.5rem;
+                max-width: calc(100% - 1rem);
+            }
+            .d-flex.gap-2 {
+                flex-wrap: wrap;
+                gap: 0.5rem !important;
+            }
+            .search-bar {
+                width: 100% !important;
+                margin-top: 0.5rem;
+            }
+            .admin-profile {
+                padding: 1rem !important;
+                margin-bottom: 1rem !important;
+                text-align: center;
+            }
+            .admin-profile .row {
+                align-items: center;
+                text-align: center;
+            }
+            .admin-profile .col-md-4 {
+                margin-top: 1rem;
+            }
+            .card-header h5 {
+                font-size: 1rem;
+            }
+            .activity-item {
+                padding: 0.75rem;
+                margin-bottom: 0.5rem;
+            }
+            .table th, .table td {
+                padding: 0.5rem 0.25rem;
+                font-size: 0.75rem;
+            }
+            .badge {
+                font-size: 0.65rem;
+                padding: 0.2rem 0.4rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .content-area {
+                padding: 0.75rem !important;
+            }
+            .card-body {
+                padding: 1rem;
+            }
+            .btn-action {
+                padding: 0.15rem 0.3rem;
+                font-size: 0.7rem;
+            }
+        }
+
+        /* Role-based styling */
+        .role-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .super-admin {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+        }
+
+        .hr-admin {
+            background: linear-gradient(135deg, #0abde3, #006ba6);
+            color: white;
+        }
+
+        .operations-admin {
+            background: linear-gradient(135deg, #00d2d3, #54a0ff);
+            color: white;
+        }
+
+        .admin-profile {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            margin: 0 auto 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .profile-avatar {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+            .admin-profile {
+                padding: 1rem;
+                text-align: center;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .content-area {
+                margin-left: 280px;
+            }
+            .mobile-toggle {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .content-area {
+                padding: 0.75rem !important;
+            }
+            .card-body {
+                padding: 1rem;
+            }
+            .btn-action {
+                padding: 0.2rem 0.4rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .search-bar {
+            background: white;
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .search-bar:focus-within {
+            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.15);
+        }
+
+        /* Enhanced Table Styling */
+        .table-row-hover {
+            opacity: 0;
+            animation: fadeInRow 0.5s ease forwards;
+            transition: all 0.3s ease;
+        }
+
+        .table-row-hover:hover {
+            background-color: #f8f9fa !important;
+            transform: scale(1.01);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        @keyframes fadeInRow {
+            from {
+                opacity: 0;
+                transform: translateX(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .email-link {
+            color: #0066cc !important;
+            transition: all 0.3s ease;
+        }
+
+        .email-link:hover {
+            color: #004499 !important;
+            text-decoration: underline !important;
+        }
+
+        .subject-text {
+            background: #e9ecef;
+            padding: 0.25rem 0.5rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: #495057;
+        }
+
+        .message-preview {
+            max-width: 200px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            background: #f8f9fa;
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            cursor: help;
+            font-size: 0.85rem;
+        }
+
+        .date-display {
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+
+        .btn-action {
+            transition: all 0.3s ease;
+            border-radius: 8px;
+        }
+
+        .btn-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        /* Mobile Table Optimizations */
+        @media (max-width: 768px) {
+            .table th, .table td {
+                padding: 0.5rem 0.25rem !important;
+                font-size: 0.8rem;
+            }
+
+            .user-info {
+                align-items: flex-start;
+            }
+
+            .btn-group {
+                flex-direction: row !important;
+                gap: 0.25rem;
+            }
+
+            .btn-action {
+                padding: 0.25rem 0.4rem !important;
+                font-size: 0.75rem;
+            }
+
+            .table-responsive {
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .table th:first-child,
+            .table td:first-child {
+                position: sticky;
+                left: 0;
+                background: white;
+                z-index: 1;
+                box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            }
+
+            .user-info {
+                min-width: 100px;
+            }
+
+            .btn-action span {
+                display: none !important;
+            }
+
+            .btn-action {
+                width: 32px;
+                height: 32px;
+                padding: 0.25rem !important;
+            }
+        }
+
+        .badge-status {
+            padding: 0.5em 1em;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .activity-item {
+            padding: 1rem;
+            border-left: 3px solid #007bff;
+            margin-bottom: 0.75rem;
+            background: white;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            opacity: 0;
+            animation: slideInUp 0.5s ease forwards;
+        }
+
+        .activity-item:hover {
+            background: #f8f9fa;
+            transform: translateX(8px) translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .activity-item.priority-high {
+            border-left-color: #dc3545;
+            background: linear-gradient(135deg, #fff 0%, #fff5f5 100%);
+        }
+
+        .activity-item.priority-medium {
+            border-left-color: #ffc107;
+            background: linear-gradient(135deg, #fff 0%, #fffbf0 100%);
+        }
+
+        .activity-item.priority-low {
+            border-left-color: #6c757d;
+        }
+
+        .activity-icon-wrapper {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0,123,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .activity-item:hover .activity-icon-wrapper {
+            background: rgba(0,123,255,0.2);
+            transform: scale(1.1);
+        }
+
+        .time-badge {
+            background: #e9ecef;
+            color: #495057;
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .activity-message {
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .activity-details {
+            font-size: 0.85rem;
+            color: #6c757d !important;
+        }
+
+        .email-display {
+            max-width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #6c757d;
+        }
+
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 2rem;
+        }
+
+        .brand-logo:hover {
+            color: #ffc107;
+        }
+
+        /* Template Stylesheet */
+        /* link href="css/style.css" rel="stylesheet" */
+
+        /* Flying rocket animation */
+        .flying-rocket {
+            display: inline-block;
+            animation: fly 3s ease-in-out infinite;
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+
+        .brand-icon {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        @keyframes fly {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-10px) rotate(-5deg);
+            }
+            50% {
+                transform: translateY(-5px) rotate(5deg);
+            }
+            75% {
+                transform: translateY(-15px) rotate(-3deg);
+            }
+        }
+
+        .navbar-brand:hover .flying-rocket {
+            animation: launch 0.8s ease-out;
+        }
+
+        @keyframes launch {
+            0% {
+                transform: translateY(0px) scale(1);
+            }
+            50% {
+                transform: translateY(-30px) scale(1.2) rotate(10deg);
+            }
+            100% {
+                transform: translateY(0px) scale(1);
+            }
+        }
+
+        /* Responsive logo adjustments */
+        @media (max-width: 768px) {
+            .flying-rocket {
+                font-size: 1.2em;
+                margin-right: 8px;
+            }
+            .navbar-brand h1 {
+                font-size: 1.8rem !important;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .flying-rocket {
+                font-size: 1em;
+                margin-right: 6px;
+            }
+            .navbar-brand h1 {
+                font-size: 1.5rem !important;
+            }
+        }
+
+        /* Quick Navigation Styles */
+        .quick-nav-toggle {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .quick-nav-toggle:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .quick-nav-menu {
+            display: none;
+            margin-top: 10px;
+            background: white;
+            border-radius: 15px;
+            padding: 10px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease-out;
+        }
+
+        .quick-nav-menu.show {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .quick-nav-menu .btn {
+            background-color: rgba(0, 123, 255, 0.05);
+            border-color: rgba(0, 123, 255, 0.2);
+            color: #007bff;
+            transition: all 0.3s ease;
+        }
+
+        .quick-nav-menu .btn:hover {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+            transform: scale(1.05);
+        }
+
+        .quick-nav-menu hr {
+            border-top: 1px solid #eee;
+        }
+
+        /* Admin Profile Styling */
+        .admin-profile .col-md-4 .btn {
+            border-radius: 20px;
+            padding: 0.4rem 1.2rem;
+        }
+
+        .admin-profile .col-md-4 .btn i {
+            margin-right: 0.5rem;
+        }
+    </style>
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <!-- Mobile Toggle Button -->
+    <button class="btn btn-primary mobile-toggle position-fixed rounded-circle" style="top: 20px; left: 20px; z-index: 1001; display: none; width: 50px; height: 50px;" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Overlay for Mobile -->
+    <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar position-fixed" id="sidebar" style="width: 280px; top: 0; left: 0;">
+        <div class="p-4">
+            <a href="index.html" class="brand-logo">
+                <div class="logo-container">
+                    <div class="logo-icon" style="background: linear-gradient(135deg, #ffffff, #f8f9fa); box-shadow: 0 4px 15px rgba(255,255,255,0.2);">
+                        <span style="filter: brightness(0.8);">🚀</span>
+                    </div>
+                    <div class="logo-text">
+                        <div class="logo-title" style="color: white; font-size: 18px; background: none; -webkit-text-fill-color: white;">SATYAM SUMAN</div>
+                        <div class="logo-subtitle" style="color: rgba(255,255,255,0.8);">Admin Dashboard</div>
+                    </div>
+                </div>
+            </a>
+            <h5 class="text-white-50 mb-4">Admin Dashboard</h5>
+
+            <nav class="nav flex-column">
+                <a class="nav-link active" href="#" onclick="showSection('overview')">
+                    <i class="fas fa-chart-line me-2"></i> Overview
+                </a>
+                <a class="nav-link" href="#" onclick="showSection('contacts')">
+                    <i class="fas fa-envelope me-2"></i> Contact Messages
+                    <span class="badge bg-primary ms-auto" id="contactsBadge">0</span>
+                </a>
+                <a class="nav-link" href="#" onclick="showSection('newsletters')">
+                    <i class="fas fa-paper-plane me-2"></i> Newsletter Subs
+                    <span class="badge bg-info ms-auto" id="newslettersBadge">0</span>
+                </a>
+                <a class="nav-link" href="#" onclick="showSection('applications')">
+                    <i class="fas fa-user-tie me-2"></i> Job Applications
+                    <span class="badge bg-success ms-auto" id="applicationsBadge">0</span>
+                </a>
+                <a class="nav-link" href="#" onclick="showSection('analytics')">
+                    <i class="fas fa-chart-bar me-2"></i> Analytics
+                </a>
+
+                <hr class="my-3 text-white-50">
+
+                <a class="nav-link" href="index.html">
+                    <i class="fas fa-home me-2"></i> Back to Website
+                </a>
+                <a class="nav-link text-danger" href="#" onclick="logout()">
+                    <i class="fas fa-sign-out-alt me-2"></i> Logout
+                </a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content-area p-4">
+        <!-- Admin Profile Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="admin-profile">
+                    <div class="row align-items-center">
+                        <div class="col-md-2 text-center">
+                            <div class="profile-avatar" id="profileAvatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4 class="mb-1 fw-bold" id="adminName">Loading...</h4>
+                            <p class="text-muted mb-2" id="adminEmail">Loading...</p>
+                            <span class="role-badge" id="adminRole">Loading...</span>
+                        </div>
+                        <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                            <div class="d-flex flex-column flex-md-row gap-2">
+                                <button class="btn btn-outline-primary btn-sm" onclick="editProfile()">
+                                    <i class="fas fa-edit me-1"></i>Edit Profile
+                                </button>
+                                <button class="btn btn-outline-danger btn-sm" onclick="logout()">
+                                    <i class="fas fa-sign-out-alt me-1"></i>Logout
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card border-0 bg-gradient" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <div class="card-body text-white">
+                        <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
+                            <div>
+                                <h2 class="mb-1" id="welcomeMessage">Welcome back!</h2>
+                                <p class="mb-0 opacity-75">Here's what's happening with your business today.</p>
+                            </div>
+                            <div class="mt-3 mt-md-0 w-100" style="max-width: 300px;">
+                                <div class="search-bar d-flex align-items-center">
+                                    <i class="fas fa-search text-muted me-2"></i>
+                                    <input type="text" class="form-control border-0" placeholder="Search..." id="globalSearch">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Overview Section -->
+        <div id="overview-section">
+            <!-- Stats Cards -->
+            <div class="row g-4 mb-5">
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card stat-card text-center p-4 h-100">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="text-start">
+                                <h3 class="mb-1" id="totalContacts">0</h3>
+                                <p class="mb-0 opacity-75">Total Contacts</p>
+                            </div>
+                            <i class="fas fa-envelope fa-2x opacity-50"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card text-center p-4 h-100" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="text-start">
+                                <h3 class="mb-1" id="totalNewsletters">0</h3>
+                                <p class="mb-0 opacity-75">Newsletter Subs</p>
+                            </div>
+                            <i class="fas fa-paper-plane fa-2x opacity-50"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card text-center p-4 h-100" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white;">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="text-start">
+                                <h3 class="mb-1" id="totalApplications">0</h3>
+                                <p class="mb-0 opacity-75">Job Applications</p>
+                            </div>
+                            <i class="fas fa-user-tie fa-2x opacity-50"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card text-center p-4 h-100" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white;">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="text-start">
+                                <h3 class="mb-1" id="todayContacts">0</h3>
+                                <p class="mb-0 opacity-75">Today's Contacts</p>
+                            </div>
+                            <i class="fas fa-calendar-day fa-2x opacity-50"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activities -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">
+                                <i class="fas fa-clock me-2 text-primary"></i>
+                                Recent Activities
+                            </h5>
+                            <button class="btn btn-sm btn-outline-primary" onclick="loadDashboardData()">
+                                <i class="fas fa-sync-alt"></i>
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <div id="recentActivities" class="loading">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Messages Section -->
+        <div id="contacts-section" style="display: none;">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
+                        <h3 class="mb-3 mb-md-0">
+                            <i class="fas fa-envelope me-2 text-primary"></i>
+                            Contact Messages
+                        </h3>
+                        <div class="d-flex flex-wrap gap-2">
+                            <button class="btn btn-outline-success" onclick="exportData('contacts')">
+                                <i class="fas fa-download me-2"></i>Export
+                            </button>
+                            <button class="btn btn-outline-warning" onclick="loadContacts()">
+                                <i class="fas fa-sync-alt me-2"></i>Refresh
+                            </button>
+                            <button class="btn btn-outline-danger" onclick="clearData('contacts')">
+                                <i class="fas fa-trash me-2"></i>Clear All
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th class="px-4 py-3">Name</th>
+                                    <th class="px-4 py-3">Email</th>
+                                    <th class="px-4 py-3 d-none d-md-table-cell">Subject</th>
+                                    <th class="px-4 py-3 d-none d-lg-table-cell">Message</th>
+                                    <th class="px-4 py-3">Date</th>
+                                    <th class="px-4 py-3 text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="contactsTable">
+                                <tr>
+                                    <td colspan="6" class="text-center p-5">
+                                        <div class="loading">
+                                            <div class="spinner-border text-primary" role="status">
+                                                <span class="visually-hidden">Loading...</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Newsletter Section -->
+        <div id="newsletters-section" style="display: none;">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
+                        <h3 class="mb-3 mb-md-0">
+                            <i class="fas fa-paper-plane me-2 text-info"></i>
+                            Newsletter Subscriptions
+                        </h3>
+                        <div class="d-flex flex-wrap gap-2">
+                            <button class="btn btn-outline-success" onclick="exportData('newsletters')">
+                                <i class="fas fa-download me-2"></i>Export
+                            </button>
+                            <button class="btn btn-outline-warning" onclick="loadNewsletters()">
+                                <i class="fas fa-sync-alt me-2"></i>Refresh
+                            </button>
+                            <button class="btn btn-outline-danger" onclick="clearData('newsletters')">
+                                <i class="fas fa-trash me-2"></i>Clear All
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th class="px-4 py-3">Email</th>
+                                    <th class="px-4 py-3">Subscription Date</th>
+                                    <th class="px-4 py-3">Status</th>
+                                    <th class="px-4 py-3 text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="newslettersTable">
+                                <tr>
+                                    <td colspan="4" class="text-center p-5">
+                                        <div class="loading">
+                                            <div class="spinner-border text-primary" role="status">
+                                                <span class="visually-hidden">Loading...</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Applications Section -->
+        <div id="applications-section" style="display: none;">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center">
+                        <h3 class="mb-3 mb-md-0">
+                            <i class="fas fa-user-tie me-2 text-success"></i>
+                            Job Applications
+                        </h3>
+                        <div class="d-flex flex-wrap gap-2">
+                            <button class="btn btn-outline-success" onclick="exportData('applications')">
+                                <i class="fas fa-download me-2"></i>Export
+                            </button>
+                            <button class="btn btn-outline-warning" onclick="loadApplications()">
+                                <i class="fas fa-sync-alt me-2"></i>Refresh
+                            </button>
+                            <button class="btn btn-outline-danger" onclick="clearData('applications')">
+                                <i class="fas fa-trash me-2"></i>Clear All
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th class="px-4 py-3">Name</th>
+                                    <th class="px-4 py-3">Email</th>
+                                    <th class="px-4 py-3 d-none d-md-table-cell">Position</th>
+                                    <th class="px-4 py-3 d-none d-lg-table-cell">Experience</th>
+                                    <th class="px-4 py-3">Date</th>
+                                    <th class="px-4 py-3 text-center">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="applicationsTable">
+                                <tr>
+                                    <td colspan="6" class="text-center p-5">
+                                        <div class="loading">
+                                            <div class="spinner-border text-primary" role="status">
+                                                <span class="visually-hidden">Loading...</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analytics Section -->
+        <div id="analytics-section" style="display: none;">
+            <div class="row g-4 mb-4">
+                <div class="col-12">
+                    <h3 class="mb-4">
+                        <i class="fas fa-chart-bar me-2 text-warning"></i>
+                        Analytics & Reports
+                    </h3>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Contact Trends</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="empty-state">
+                                <i class="fas fa-chart-line fa-3x mb-3 text-muted"></i>
+                                <p>Contact trends chart will be displayed here</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">Newsletter Growth</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="empty-state">
+                                <i class="fas fa-chart-area fa-3x mb-3 text-muted"></i>
+                                <p>Newsletter growth chart will be displayed here</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for viewing details -->
+    <div class="modal fade" id="detailModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="modalBody">
+                    <!-- Content will be populated here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Global variables
+        let currentSection = 'overview';
+
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check authentication
+            const currentAdmin = JSON.parse(localStorage.getItem('currentAdmin'));
+            if (!currentAdmin) {
+                window.location.href = 'admin-login.html';
+                return;
+            }
+
+            loadAdminProfile(currentAdmin);
+            loadDashboardData();
+            showSection('overview');
+        });
+
+        // Load admin profile
+        function loadAdminProfile(admin) {
+            document.getElementById('adminName').textContent = admin.fullName;
+            document.getElementById('adminEmail').textContent = admin.email;
+            document.getElementById('welcomeMessage').textContent = `Welcome back, ${admin.fullName.split(' ')[0]}!`;
+
+            const roleElement = document.getElementById('adminRole');
+            roleElement.textContent = admin.role;
+
+            // Apply role-specific styling
+            roleElement.className = 'role-badge';
+            if (admin.role === 'Super Admin') {
+                roleElement.classList.add('super-admin');
+            } else if (admin.role === 'HR Admin') {
+                roleElement.classList.add('hr-admin');
+            } else if (admin.role === 'Operations Admin') {
+                roleElement.classList.add('operations-admin');
+            }
+
+            // Set profile avatar initials
+            const initials = admin.fullName.split(' ').map(name => name[0]).join('');
+            document.getElementById('profileAvatar').innerHTML = `<span style="font-size: 1.5rem; font-weight: bold;">${initials}</span>`;
+
+            // Role-based access control
+            applyRoleBasedAccess(admin.role);
+        }
+
+        // Apply role-based access control
+        function applyRoleBasedAccess(role) {
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            if (role === 'HR Admin') {
+                // HR Admin can only see applications and basic overview
+                navLinks.forEach(link => {
+                    const text = link.textContent.trim();
+                    if (!text.includes('Overview') && !text.includes('Job Applications') && !text.includes('Back to Website') && !text.includes('Logout')) {
+                        link.style.display = 'none';
+                    }
+                });
+            } else if (role === 'Operations Admin') {
+                // Operations Admin can see contacts, newsletters, and overview
+                navLinks.forEach(link => {
+                    const text = link.textContent.trim();
+                    if (text.includes('Analytics')) {
+                        link.style.display = 'none';
+                    }
+                });
+            }
+            // Super Admin has access to everything (no restrictions)
+        }
+
+        // Edit profile function
+        function editProfile() {
+            const currentAdmin = JSON.parse(localStorage.getItem('currentAdmin'));
+
+            Swal.fire({
+                title: 'Edit Profile',
+                html: `
+                    <div class="text-start">
+                        <div class="mb-3">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="editFullName" value="${currentAdmin.fullName}">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" id="editEmail" value="${currentAdmin.email}">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Role</label>
+                            <input type="text" class="form-control" value="${currentAdmin.role}" disabled>
+                        </div>
+                    </div>
+                `,
+                showCancelButton: true,
+                confirmButtonText: 'Save Changes',
+                preConfirm: () => {
+                    const newName = document.getElementById('editFullName').value;
+                    const newEmail = document.getElementById('editEmail').value;
+
+                    if (!newName || !newEmail) {
+                        Swal.showValidationMessage('Please fill in all fields');
+                        return false;
+                    }
+
+                    return { name: newName, email: newEmail };
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    currentAdmin.fullName = result.value.name;
+                    currentAdmin.email = result.value.email;
+
+                    // Update in adminUsers array
+                    let adminUsers = JSON.parse(localStorage.getItem('adminUsers')) || [];
+                    const index = adminUsers.findIndex(u => u.username === currentAdmin.username);
+                    if (index !== -1) {
+                        adminUsers[index] = currentAdmin;
+                        localStorage.setItem('adminUsers', JSON.stringify(adminUsers));
+                    }
+
+                    // Update current session
+                    localStorage.setItem('currentAdmin', JSON.stringify(currentAdmin));
+
+                    // Reload profile display
+                    loadAdminProfile(currentAdmin);
+
+                    showToast('Profile updated successfully', 'success');
+                }
+            });
+        }
+
+        // Sidebar toggle for mobile
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.add('show');
+            overlay.style.display = 'block';
+        }
+
+        function closeSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.remove('show');
+            overlay.style.display = 'none';
+        }
+
+        // Show section
+        function showSection(section) {
+            // Hide all sections
+            document.querySelectorAll('[id$="-section"]').forEach(el => el.style.display = 'none');
+
+            // Show selected section
+            document.getElementById(section + '-section').style.display = 'block';
+
+            // Update active nav link
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+            event.target.classList.add('active');
+
+            currentSection = section;
+
+            // Load section specific data
+            if (section === 'contacts') loadContacts();
+            else if (section === 'newsletters') loadNewsletters();
+            else if (section === 'applications') loadApplications();
+            else if (section === 'analytics') loadAnalytics();
+
+            // Close sidebar on mobile after selection
+            if (window.innerWidth <= 768) {
+                closeSidebar();
+            }
+        }
+
+        // Load dashboard data
+        function loadDashboardData() {
+            const contacts = JSON.parse(localStorage.getItem('contactMessages')) || [];
+            const newsletters = JSON.parse(localStorage.getItem('newsletterSubscriptions')) || [];
+            const applications = JSON.parse(localStorage.getItem('jobApplications')) || [];
+
+            // Update stats
+            document.getElementById('totalContacts').textContent = contacts.length;
+            document.getElementById('totalNewsletters').textContent = newsletters.length;
+            document.getElementById('totalApplications').textContent = applications.length;
+
+            // Update badges
+            document.getElementById('contactsBadge').textContent = contacts.length;
+            document.getElementById('newslettersBadge').textContent = newsletters.length;
+            document.getElementById('applicationsBadge').textContent = applications.length;
+
+            // Today's contacts
+            const today = new Date().toDateString();
+            const todayContacts = contacts.filter(contact => 
+                new Date(contact.timestamp).toDateString() === today
+            );
+            document.getElementById('todayContacts').textContent = todayContacts.length;
+
+            // Load recent activities
+            loadRecentActivities();
+        }
+
+        // Load recent activities with enhanced user-friendly display
+        function loadRecentActivities() {
+            const contacts = JSON.parse(localStorage.getItem('contactMessages')) || [];
+            const newsletters = JSON.parse(localStorage.getItem('newsletterSubscriptions')) || [];
+            const applications = JSON.parse(localStorage.getItem('jobApplications')) || [];
+
+            let activities = [];
+
+            // Add recent contacts with more details
+            contacts.slice(-8).forEach(contact => {
+                activities.push({
+                    type: 'contact',
+                    message: `${contact.name} sent a message`,
+                    details: contact.subject || 'Contact inquiry',
+                    email: contact.email,
+                    time: contact.timestamp,
+                    icon: 'fas fa-envelope text-primary',
+                    priority: getTimePriority(contact.timestamp)
+                });
+            });
+
+            // Add recent newsletters
+            newsletters.slice(-6).forEach(newsletter => {
+                activities.push({
+                    type: 'newsletter',
+                    message: `New subscriber joined`,
+                    details: 'Newsletter subscription',
+                    email: newsletter.email,
+                    time: newsletter.timestamp,
+                    icon: 'fas fa-paper-plane text-info',
+                    priority: getTimePriority(newsletter.timestamp)
+                });
+            });
+
+            // Add recent applications
+            applications.slice(-5).forEach(application => {
+                activities.push({
+                    type: 'application',
+                    message: `${application.name} applied for ${application.position}`,
+                    details: `${application.experience} years experience`,
+                    email: application.email,
+                    time: application.timestamp,
+                    icon: 'fas fa-user-tie text-success',
+                    priority: getTimePriority(application.timestamp)
+                });
+            });
+
+            // Sort by time and take latest 15
+            activities.sort((a, b) => new Date(b.time) - new Date(a.time));
+            activities = activities.slice(0, 15);
+
+            const activitiesContainer = document.getElementById('recentActivities');
+
+            if (activities.length === 0) {
+                activitiesContainer.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-chart-line fa-3x mb-3 text-muted"></i>
+                        <h5>No Recent Activities</h5>
+                        <p class="text-muted">User activities will appear here once visitors start engaging with your website.</p>
+                        <button class="btn btn-outline-primary btn-sm mt-2" onclick="loadDashboardData()">
+                            <i class="fas fa-sync-alt me-1"></i>Refresh Data
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            activitiesContainer.innerHTML = activities.map((activity, index) => `
+                <div class="activity-item ${activity.priority}" style="animation-delay: ${index * 0.1}s">
+                    <div class="d-flex align-items-start">
+                        <div class="me-3 mt-1">
+                            <div class="activity-icon-wrapper">
+                                <i class="${activity.icon} fa-lg"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1">
+                            <div class="d-flex justify-content-between align-items-start mb-1">
+                                <p class="mb-1 fw-semibold activity-message">${activity.message}</p>
+                                <span class="time-badge">${getRelativeTime(activity.time)}</span>
+                            </div>
+                            <p class="mb-1 text-muted activity-details">${activity.details}</p>
+                            <small class="text-muted d-flex align-items-center">
+                                <i class="fas fa-envelope me-1"></i>
+                                <span class="email-display">${activity.email}</span>
+                                <span class="mx-2">•</span>
+                                <i class="fas fa-clock me-1"></i>
+                                <span>${formatDate(activity.time)}</span>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Helper function to get time-based priority
+        function getTimePriority(timestamp) {
+            const now = new Date();
+            const time = new Date(timestamp);
+            const diffHours = (now - time) / (1000 * 60 * 60);
+
+            if (diffHours < 1) return 'priority-high';
+            if (diffHours < 24) return 'priority-medium';
+            return 'priority-low';
+        }
+
+        // Helper function to get relative time
+        function getRelativeTime(timestamp) {
+            const now = new Date();
+            const time = new Date(timestamp);
+            const diffMs = now - time;
+            const diffHours = diffMs / (1000 * 60 * 60);
+            const diffDays = diffMs / (1000 * 60 * 60 * 24);
+
+            if (diffHours < 1) return 'Just now';
+            if (diffHours < 24) return `${Math.floor(diffHours)}h ago`;
+            if (diffDays < 7) return `${Math.floor(diffDays)}d ago`;
+            return time.toLocaleDateString();
+        }
+
+        // Load contacts
+        function loadContacts() {
+            const contacts = JSON.parse(localStorage.getItem('contactMessages')) || [];
+            const table = document.getElementById('contactsTable');
+
+            if (contacts.length === 0) {
+                table.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="text-center p-5">
+                            <div class="empty-state">
+                                <i class="fas fa-envelope fa-3x mb-3 text-muted"></i>
+                                <h5>No Contact Messages</h5>
+                                <p class="text-muted">Contact messages from your website will appear here.</p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            // Sort contacts by most recent first
+            contacts.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+            table.innerHTML = contacts.map((contact, index) => `
+                <tr class="table-row-hover" style="animation-delay: ${index * 0.05}s">
+                    <td class="px-3 py-3">
+                        <div class="user-info">
+                            <div class="fw-semibold text-truncate" style="max-width: 120px;">${contact.name}</div>
+                            <small class="text-muted d-block d-md-none">${contact.email}</small>
+                        </div>
+                    </td>
+                    <td class="px-3 py-3 d-none d-md-table-cell">
+                        <a href="mailto:${contact.email}" class="text-decoration-none email-link">${contact.email}</a>
+                    </td>
+                    <td class="px-3 py-3 d-none d-lg-table-cell">
+                        <span class="subject-text">${contact.subject || 'General Inquiry'}</span>
+                    </td>
+                    <td class="px-3 py-3 d-none d-xl-table-cell">
+                        <div class="message-preview" title="${contact.message}">
+                            ${truncateText(contact.message, 40)}
+                        </div>
+                    </td>
+                    <td class="px-3 py-3">
+                        <div class="date-display">
+                            <span class="d-none d-md-inline">${formatDate(contact.timestamp)}</span>
+                            <span class="d-md-none">${getRelativeTime(contact.timestamp)}</span>
+                        </div>
+                    </td>
+                    <td class="px-3 py-3 text-center">
+                        <div class="btn-group btn-group-sm" role="group">
+                            <button class="btn btn-outline-primary btn-action" onclick="viewDetails('contact', ${contact.id || index})" title="View Details">
+                                <i class="fas fa-eye"></i>
+                                <span class="d-none d-lg-inline ms-1">View</span>
+                            </button>
+                            <button class="btn btn-outline-danger btn-action" onclick="deleteItem('contacts', ${contact.id || index})" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Load newsletters
+        function loadNewsletters() {
+            const newsletters = JSON.parse(localStorage.getItem('newsletterSubscriptions')) || [];
+            const table = document.getElementById('newslettersTable');
+
+            if (newsletters.length === 0) {
+                table.innerHTML = `
+                    <tr>
+                        <td colspan="4" class="text-center p-5">
+                            <div class="empty-state">
+                                <i class="fas fa-paper-plane fa-3x mb-3 text-muted"></i>
+                                <h5>No Newsletter Subscriptions</h5>
+                                <p class="text-muted">Newsletter subscriptions from your website will appear here.</p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            // Sort newsletters by most recent first
+            newsletters.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+            table.innerHTML = newsletters.map(newsletter => `
+                <tr>
+                    <td class="px-4 py-3 fw-semibold">
+                        <a href="mailto:${newsletter.email}" class="text-decoration-none">${newsletter.email}</a>
+                    </td>
+                    <td class="px-4 py-3 text-muted">${formatDate(newsletter.timestamp)}</td>
+                    <td class="px-4 py-3">
+                        <span class="badge badge-status bg-success">Active</span>
+                    </td>
+                    <td class="px-4 py-3 text-center">
+                        <button class="btn btn-sm btn-outline-danger btn-action" onclick="deleteItem('newsletters', ${newsletter.id || Date.now()})" title="Delete">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // Load applications
+        function loadApplications() {
+            const applications = JSON.parse(localStorage.getItem('jobApplications')) || [];
+            const table = document.getElementById('applicationsTable');
+
+            if (applications.length === 0) {
+                table.innerHTML = `
+                    <tr>
+                        <td colspan="6" class="text-center p-5">
+                            <div class="empty-state">
+                                <i class="fas fa-user-tie fa-3x mb-3 text-muted"></i>
+                                <h5>No Job Applications</h5>
+                                <p class="text-muted">Job applications from your website will appear here.</p>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            // Sort applications by most recent first
+            applications.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+            table.innerHTML = applications.map(application => `
+                <tr>
+                    <td class="px-4 py-3 fw-semibold">${application.name}</td>
+                    <td class="px-4 py-3">
+                        <a href="mailto:${application.email}" class="text-decoration-none">${application.email}</a>
+                    </td>
+                    <td class="px-4 py-3 d-none d-md-table-cell">
+                        <span class="badge bg-info">${application.position}</span>
+                    </td>
+                    <td class="px-4 py-3 d-none d-lg-table-cell">${application.experience} years</td>
+                    <td class="px-4 py-3 text-muted">${formatDate(application.timestamp)}</td>
+                    <td class="px-4 py-3 text-center">
+                        <div class="btn-group" role="group">
+                            <button class="btn btn-sm btn-outline-primary btn-action" onclick="viewDetails('application', ${application.id || Date.now()})" title="View Details">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger btn-action" onclick="deleteItem('applications', ${application.id || Date.now()})" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // View details
+        function viewDetails(type, id) {
+            let data, title, content;
+
+            if (type === 'contact') {
+                data = JSON.parse(localStorage.getItem('contactMessages')) || [];
+                const item = data.find(d => d.id === id) || data[0];
+                if (!item) return;
+
+                title = 'Contact Message Details';
+                content = `
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="card border-0 bg-light">
+                                <div class="card-body">
+                                    <h6 class="card-title text-primary mb-3">Contact Information</h6>
+                                    <p><strong>Name:</strong> ${item.name}</p>
+                                    <p><strong>Email:</strong> <a href="mailto:${item.email}">${item.email}</a></p>
+                                    <p><strong>Subject:</strong> ${item.subject || 'N/A'}</p>
+                                    <p><strong>Mobile:</strong> ${item.mobile || 'N/A'}</p>
+                                    <p><strong>Date:</strong> ${formatDate(item.timestamp)}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card border-0 bg-light">
+                                <div class="card-body">
+                                    <h6 class="card-title text-primary mb-3">Message</h6>
+                                    <div class="border p-3 bg-white rounded">
+                                        ${item.message}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (type === 'application') {
+                data = JSON.parse(localStorage.getItem('jobApplications')) || [];
+                const item = data.find(d => d.id === id) || data[0];
+                if (!item) return;
+
+                title = 'Job Application Details';
+                content = `
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="card border-0 bg-light">
+                                <div class="card-body">
+                                    <h6 class="card-title text-primary mb-3">Personal Information</h6>
+                                    <p><strong>Name:</strong> ${item.name}</p>
+                                    <p><strong>Email:</strong> <a href="mailto:${item.email}">${item.email}</a></p>
+                                    <p><strong>Phone:</strong> ${item.phone}</p>
+                                    <p><strong>Position:</strong> <span class="badge bg-info">${item.position}</span></p>
+                                    <p><strong>Experience:</strong> ${item.experience} years</p>
+                                    <p><strong>Education:</strong> ${item.education}</p>
+                                    <p><strong>Expected Salary:</strong> ${item.currentSalary} LPA</p>
+                                    <p><strong>Portfolio:</strong> <a href="${item.portfolio}" target="_blank" class="btn btn-sm btn-outline-primary">View Portfolio</a></p>
+                                    <p><strong>Date:</strong> ${formatDate(item.timestamp)}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="card border-0 bg-light">
+                                <div class="card-body">
+                                    <h6 class="card-title text-primary mb-3">Skills</h6>
+                                    <div class="border p-3 bg-white rounded mb-3">${item.skills}</div>
+
+                                    <h6 class="card-title text-primary mb-3">Cover Letter</h6>
+                                    <div class="border p-3 bg-white rounded">${item.coverLetter}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalBody').innerHTML = content;
+            new bootstrap.Modal(document.getElementById('detailModal')).show();
+        }
+
+        // Delete item
+        function deleteItem(type, id) {
+            if (!confirm('Are you sure you want to delete this item?')) return;
+
+            let storageKey = '';
+            if (type === 'contacts') storageKey = 'contactMessages';
+            else if (type === 'newsletters') storageKey = 'newsletterSubscriptions';
+            else if (type === 'applications') storageKey = 'jobApplications';
+
+            let data = JSON.parse(localStorage.getItem(storageKey)) || [];
+            data = data.filter(item => item.id !== id);
+            localStorage.setItem(storageKey, JSON.stringify(data));
+
+            // Reload current section
+            if (type === 'contacts') loadContacts();
+            else if (type === 'newsletters') loadNewsletters();
+            else if (type === 'applications') loadApplications();
+
+            loadDashboardData(); // Update stats
+
+            // Show success message
+            showToast('Item deleted successfully', 'success');
+        }
+
+        // Clear all data
+        function clearData(type) {
+            if (!confirm('Are you sure you want to clear all data? This action cannot be undone.')) return;
+
+            let storageKey = '';
+            let typeName = '';
+            if (type === 'contacts') {
+                storageKey = 'contactMessages';
+                typeName = 'contact messages';
+            } else if (type === 'newsletters') {
+                storageKey = 'newsletterSubscriptions';
+                typeName = 'newsletter subscriptions';
+            } else if (type === 'applications') {
+                storageKey = 'jobApplications';
+                typeName = 'job applications';
+            }
+
+            localStorage.removeItem(storageKey);
+
+            // Reload current section
+            if (type === 'contacts') loadContacts();
+            else if (type === 'newsletters') loadNewsletters();
+            else if (type === 'applications') loadApplications();
+
+            loadDashboardData(); // Update stats
+
+            showToast(`All ${typeName} cleared successfully`, 'success');
+        }
+
+        // Export data
+        function exportData(type) {
+            let data, filename;
+
+            if (type === 'contacts') {
+                data = JSON.parse(localStorage.getItem('contactMessages')) || [];
+                filename = 'contact_messages.json';
+            } else if (type === 'newsletters') {
+                data = JSON.parse(localStorage.getItem('newsletterSubscriptions')) || [];
+                filename = 'newsletter_subscriptions.json';
+            } else if (type === 'applications') {
+                data = JSON.parse(localStorage.getItem('jobApplications')) || [];
+                filename = 'job_applications.json';
+            }
+
+            if (data.length === 0) {
+                showToast('No data to export', 'warning');
+                return;
+            }
+
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            showToast('Data exported successfully', 'success');
+        }
+
+        // Utility functions
+        function formatDate(timestamp) {
+            const date = new Date(timestamp);
+            return date.toLocaleDateString() + ' ' + date.toLocaleTimeString([],{hour: '2-digit', minute:'2-digit'});
+        }
+
+        function truncateText(text, length) {
+            if (!text || text.length <= length) return text || 'N/A';
+            return text.substring(0, length) + '...';
+        }
+
+        // Toast notification
+        function showToast(message, type = 'info') {
+            // Create toast element if it doesn't exist
+            if (!document.getElementById('toastContainer')) {
+                const toastContainer = document.createElement('div');
+                toastContainer.id = 'toastContainer';
+                toastContainer.className = 'position-fixed top-0 end-0 p-3';
+                toastContainer.style.zIndex = '9999';
+                document.body.appendChild(toastContainer);
+            }
+
+            const toast = document.createElement('div');
+            toast.className = `toast align-items-center text-bg-${type} border-0`;
+            toast.innerHTML = `
+                <div class="d-flex">
+                    <div class="toast-body">${message}</div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+                </div>
+            `;
+
+            document.getElementById('toastContainer').appendChild(toast);
+            const bsToast = new bootstrap.Toast(toast);
+            bsToast.show();
+
+            toast.addEventListener('hidden.bs.toast', function() {
+                toast.remove();
+            });
+        }
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('adminLoggedIn');
+                window.location.href = 'admin-login.html';
+            }
+        }
+
+        // Load analytics (placeholder)
+        function loadAnalytics() {
+            console.log('Loading analytics...');
+            showToast('Analytics feature coming soon!', 'info');
+        }
+
+        // Global search functionality
+        document.getElementById('globalSearch').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+
+            if (currentSection === 'contacts') {
+                const rows = document.querySelectorAll('#contactsTable tr');
+                rows.forEach(row => {
+                    if (row.cells.length > 1) { // Skip empty state rows
+                        const text = row.textContent.toLowerCase();
+                        row.style.display = text.includes(searchTerm) ? '' : 'none';
+                    }
+                });
+            } else if (currentSection === 'newsletters') {
+                const rows = document.querySelectorAll('#newslettersTable tr');
+                rows.forEach(row => {
+                    if (row.cells.length > 1) {
+                        const text = row.textContent.toLowerCase();
+                        row.style.display = text.includes(searchTerm) ? '' : 'none';
+                    }
+                });
+            } else if (currentSection === 'applications') {
+                const rows = document.querySelectorAll('#applicationsTable tr');
+                rows.forEach(row => {
+                    if (row.cells.length > 1) {
+                        const text = row.textContent.toLowerCase();
+                        row.style.display = text.includes(searchTerm) ? '' : 'none';
+                    }
+                });
+            }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                closeSidebar();
+            }
+        });
+
+        // Quick Navigation Toggle Function
+        function toggleQuickNav() {
+            const menu = document.getElementById('quickNavMenu');
+            const icon = document.getElementById('quickNavIcon');
+
+            if (menu.classList.contains('show')) {
+                menu.classList.remove('show');
+                icon.className = 'fas fa-bars';
+            } else {
+                menu.classList.add('show');
+                icon.className = 'fas fa-times';
+            }
+        }
+
+        // Initialize tooltips for quick nav
+        document.addEventListener('DOMContentLoaded', function() {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+        });
+    </script>
+
+    <!-- Quick Navigation Widget -->
+    <div id="quick-nav" class="position-fixed" style="top: 50%; right: 20px; transform: translateY(-50%); z-index: 1050;">
+        <div class="bg-white rounded-3 shadow-lg p-2" style="width: 60px;">
+            <!-- Toggle Button -->
+            <button class="quick-nav-toggle d-flex align-items-center justify-content-center mb-2" 
+                    onclick="toggleQuickNav()" 
+                    title="Quick Navigation" 
+                    data-bs-toggle="tooltip">
+                <i class="fas fa-bars" id="quickNavIcon"></i>
+            </button>
+
+            <!-- Navigation Menu -->
+            <div class="quick-nav-menu" id="quickNavMenu">
+                <div class="d-flex flex-column gap-2">
+                    <a href="index.html" class="btn btn-sm btn-outline-primary rounded-circle p-2" title="Home" data-bs-toggle="tooltip">
+                        <i class="fas fa-home"></i>
+                    </a>
+                    <a href="about.html" class="btn btn-sm btn-outline-primary rounded-circle p-2" title="About" data-bs-toggle="tooltip">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="service.html" class="btn btn-sm btn-outline-primary rounded-circle p-2" title="Services" data-bs-toggle="tooltip">
+                        <i class="fas fa-cogs"></i>
+                    </a>
+                    <a href="contact.html" class="btn btn-sm btn-outline-danger rounded-circle p-2" title="Contact" data-bs-toggle="tooltip">
+                        <i class="fas fa-phone"></i>
+                    </a>
+                    <a href="project.html" class="btn btn-sm btn-outline-primary rounded-circle p-2" title="Projects" data-bs-toggle="tooltip">
+                        <i class="fas fa-briefcase"></i>
+                    </a>
+                    <a href="feature.html" class="btn btn-sm btn-outline-warning rounded-circle p-2" title="Features" data-bs-toggle="tooltip">
+                        <i class="fas fa-star"></i>
+                    </a>
+                    <a href="team.html" class="btn btn-sm btn-outline-info rounded-circle p-2" title="Team" data-bs-toggle="tooltip">
+                        <i class="fas fa-users"></i>
+                    </a>
+                    <a href="testimonial.html" class="btn btn-sm btn-outline-success rounded-circle p-2" title="Testimonials" data-bs-toggle="tooltip">
+                        <i class="fas fa-quote-left"></i>
+                    </a>
+                    <a href="join-us.html" class="btn btn-sm btn-outline-warning rounded-circle p-2" title="Join Us" data-bs-toggle="tooltip">
+                        <i class="fas fa-user-plus"></i>
+                    </a>
+                    <a href="blog.html" class="btn btn-sm btn-outline-secondary rounded-circle p-2" title="Blog" data-bs-toggle="tooltip">
+                        <i class="fas fa-blog"></i>
+                    </a>
+
+                    <!-- Admin Section -->
+                    <hr class="my-2">
+                    <a href="admin-dashboard.html" class="btn btn-sm btn-outline-dark rounded-circle p-2" title="Admin Dashboard" data-bs-toggle="tooltip">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </a>
+
+                    <!-- Social Links -->
+                    <hr class="my-2">
+                    <a href="#" class="btn btn-sm btn-outline-success rounded-circle p-2" title="WhatsApp" data-bs-toggle="tooltip" onclick="window.open('https://wa.me/918227027353', '_blank')">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="#" class="btn btn-sm btn-outline-info rounded-circle p-2" title="Telegram" data-bs-toggle="tooltip" onclick="window.open('https://t.me/satyamsuman2003', '_blank')">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="#" class="btn btn-sm btn-outline-primary rounded-circle p-2" title="LinkedIn" data-bs-toggle="tooltip" onclick="window.open('https://www.linkedin.com/in/satyamsuman2003/', '_blank')">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="btn btn-sm btn-outline-dark rounded-circle p-2" title="GitHub" data-bs-toggle="tooltip" onclick="window.open('https://github.com/SATYAMSUMAN24', '_blank')">
+                        <i class="fab fa-github"></i>
+                    </a>
+
+                    <!-- Utility Actions -->
+                    <hr class="my-2">
+                    <a href="#" class="btn btn-sm btn-outline-secondary rounded-circle p-2" title="Back to Top" data-bs-toggle="tooltip" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                        <i class="fas fa-arrow-up"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

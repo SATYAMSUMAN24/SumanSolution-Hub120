@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Join Us - Suman Solution</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600;700&family=Open+Sans:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/animate/animate.min.css" rel="stylesheet">
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- Flying rocket animation -->
+    <style>
+        .flying-rocket {
+            display: inline-block;
+            animation: fly 3s ease-in-out infinite;
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+
+        .brand-icon {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        @keyframes fly {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-10px) rotate(-5deg);
+            }
+            50% {
+                transform: translateY(-5px) rotate(5deg);
+            }
+            75% {
+                transform: translateY(-15px) rotate(-3deg);
+            }
+        }
+
+        .navbar-brand:hover .flying-rocket {
+            animation: launch 0.8s ease-out;
+        }
+
+        @keyframes launch {
+            0% {
+                transform: translateY(0px) scale(1);
+            }
+            50% {
+                transform: translateY(-30px) scale(1.2) rotate(10deg);
+            }
+            100% {
+                transform: translateY(0px) scale(1);
+            }
+        }
+
+        /* Responsive logo adjustments */
+        @media (max-width: 768px) {
+            .flying-rocket {
+                font-size: 1.2em;
+                margin-right: 8px;
+            }
+            .navbar-brand h1 {
+                font-size: 1.8rem !important;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .flying-rocket {
+                font-size: 1em;
+                margin-right: 6px;
+            }
+            .navbar-brand h1 {
+                font-size: 1.5rem !important;
+            }
+        }
+    </style>
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+    <!-- Spinner Start -->
+    <div id="spinner"
+        class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem;"></div>
+    </div>
+    <!-- Spinner End -->
+
+    <!-- Navbar Start -->
+    <div class="container-fluid fixed-top px-0 wow fadeIn" data-wow-delay="0.1s">
+        <div class="top-bar row gx-0 align-items-center d-none d-lg-flex">
+            <div class="col-lg-6 px-5 text-start">
+                <small><i class="fa fa-map-marker-alt text-primary me-2"></i>Patna, Bihar, India</small>
+                <small class="ms-4"><i class="fa fa-clock text-primary me-2"></i>9.00 am - 9.00 pm</small>
+            </div>
+            <div class="col-lg-6 px-5 text-end">
+                <small><i class="fa fa-envelope text-primary me-2"></i>satyamsuman2003@gmail.com</small>
+                <small class="ms-4"><i class="fa fa-phone-alt text-primary me-2"></i>+91 8227027353</small>
+            </div>
+        </div>
+
+        <nav class="navbar navbar-expand-lg navbar-light py-lg-0 px-lg-5 wow fadeIn" data-wow-delay="0.1s">
+                        <a href="index.html" class="navbar-brand ms-4 ms-lg-0">
+                <div class="logo-container">
+                    <div class="logo-icon"></div>
+                    <div class="logo-text">
+                        <div class="logo-title">SATYAM SUMAN</div>
+                    </div>
+                </div>
+            </a>
+            <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <div class="navbar-nav ms-auto p-4 p-lg-0">
+                    <a href="index.html" class="nav-item nav-link">Home</a>
+                    <a href="about.html" class="nav-item nav-link">About</a>
+                    <a href="service.html" class="nav-item nav-link">Services</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                        <div class="dropdown-menu border-light m-0">
+                            <a href="project.html" class="dropdown-item">Projects</a>
+                            <a href="feature.html" class="dropdown-item">Features</a>
+                            <a href="team.html" class="dropdown-item">Team Member</a>
+                            <a href="testimonial.html" class="dropdown-item">Testimonial</a>
+                            <a href="join-us.html" class="dropdown-item active">Join Us</a>
+                            <a href="blog.html" class="dropdown-item">Blog</a>
+                        </div>
+                    </div>
+                    <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    <a href="admin-login.html" class="nav-item nav-link text-primary fw-bold">Admin</a>
+                </div>
+                <div class="d-none d-lg-flex ms-2">
+                    <a class="btn btn-light btn-sm-square rounded-circle ms-3" href="https://www.facebook.com/" target="_blank">
+                        <small class="fab fa-facebook-f text-primary"></small>
+                    </a>
+                    <a class="btn btn-light btn-sm-square rounded-circle ms-3" href="https://twitter.com/" target="_blank">
+                        <small class="fab fa-twitter text-primary"></small>
+                    </a>
+                    <a class="btn btn-light btn-sm-square rounded-circle ms-3" href="https://www.linkedin.com/in/satyamsuman2003/" target="_blank">
+                        <small class="fab fa-linkedin-in text-primary"></small>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Navbar End -->
+
+    <!-- Page Header Start -->
+    <div class="container-fluid page-header mb-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container">
+            <h1 class="display-3 mb-4 animated slideInDown">Join Our Team</h1>
+            <nav aria-label="breadcrumb animated slideInDown">
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Join Us</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+    <!-- Join Us Start -->
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                <p class="d-inline-block border rounded text-primary fw-semi-bold py-1 px-3">Career Opportunities</p>
+                <h1 class="display-5 mb-5">Build Your Future With Suman Solution</h1>
+            </div>
+
+            <!-- Job Listings -->
+            <div class="row g-4 mb-5">
+                <!-- Data Scientist Position -->
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="modern-card border rounded-4 p-4 h-100 position-relative overflow-hidden">
+                        <div class="job-badge position-absolute top-0 end-0 m-3">
+                            <span class="badge bg-primary px-3 py-2 rounded-pill">🔥 Hot Job</span>
+                        </div>
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="job-icon bg-primary bg-opacity-10 rounded-circle p-3 me-4">
+                                <i class="fa fa-chart-line fa-2x text-primary"></i>
+                            </div>
+                            <div>
+                                <h4 class="mb-1 fw-bold">Senior Data Scientist</h4>
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <span class="badge bg-light text-dark">Full-time</span>
+                                    <span class="badge bg-info text-white">3-5 years</span>
+                                    <span class="badge bg-success text-white">Remote</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="mb-3">Lead data science initiatives, develop machine learning models, and drive insights from complex datasets.</p>
+                        <div class="mb-3">
+                            <h6>Requirements:</h6>
+                            <ul class="list-unstyled">
+                                <li><i class="fa fa-check text-primary me-2"></i>Master's in Data Science/Statistics</li>
+                                <li><i class="fa fa-check text-primary me-2"></i>Python, R, SQL proficiency</li>
+                                <li><i class="fa fa-check text-primary me-2"></i>Machine Learning expertise</li>
+                                <li><i class="fa fa-check text-primary me-2"></i>Experience with cloud platforms</li>
+                            </ul>
+                        </div>
+                        <div class="mb-3">
+                            <h6>Hiring Process:</h6>
+                            <ol>
+                                <li>Initial Application Review (2-3 days)</li>
+                                <li>Technical Assessment (1 week)</li>
+                                <li>Virtual Interview Round 1 (HR + Technical)</li>
+                                <li>Virtual Interview Round 2 (Leadership Team)</li>
+                                <li>Final Decision & Offer (3-5 days)</li>
+                            </ol>
+                        </div>
+                        <span class="text-primary fw-bold">₹8-12 LPA</span>
+                    </div>
+                </div>
+
+                <!-- Business Analyst Position -->
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="service-item border rounded p-4 h-100">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fa fa-business-time fa-3x text-primary me-4"></i>
+                            <div>
+                                <h4 class="mb-1">Business Intelligence Analyst</h4>
+                                <span class="text-muted">Full-time • Experience: 2-4 years</span>
+                            </div>
+                        </div>
+                        <p class="mb-3">Transform business requirements into analytical solutions and create compelling data visualizations.</p>
+                        <div class="mb-3">
+                            <h6>Requirements:</h6>
+                            <ul class="list-unstyled">
+                                <li><i class="fa fa-check text-primary me-2"></i>Bachelor's in Business/Analytics</li>
+                                <li><i class="fa fa-check text-primary me-2"></i>Tableau, Power BI expertise</li>
+                                <li><i class="fa fa-check text-primary me-2"></i>Strong SQL skills</li>
+                                <li><i class="fa fa-check text-primary me-2"></i>Business domain knowledge</li>
+                            </ul>
+                        </div>
+                        <div class="mb-3">
+                            <h6>Hiring Process:</h6>
+                            <ol>
+                                <li>Application Screening (2-3 days)</li>
+                                <li>Portfolio Review & Case Study</li>
+                                <li>Technical Interview (Analytics Tools)</li>
+                                <li>Business Scenario Discussion</li>
+                                <li>Cultural Fit Interview & Offer</li>
+                            </ol>
+                        </div>
+                        <span class="text-primary fw-bold">₹6-9 LPA</span>
+                    </div>
+                </div>
+
+                <!-- Data Engineer Position -->
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="service-item border rounded p-4 h-100">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fa fa-database fa-3x text-primary me-4"></i>
+                            <div>
+                                <h4 class="mb-1">Data Engineer</h4>
+                                <span class="text-muted">Full-time • Experience: 2-5 years</span>
+                            </div>
+                        </div>
+                        <p class="mb-3">Build and maintain scalable data pipelines, ETL processes, and data infrastructure.</p>
+                        <div class="mb-3">
+                            <h6>Requirements:</h6>
+                            <ul class="list-unstyled">
+                                <li><i class="fa fa-check text-primary me-2"></i>Computer Science degree</li>
+                                <li><i class="fa fa-check text-primary me-2"></i>Python, Scala, Java proficiency</li>
+                                <li><i class="fa fa-check text-primary me-2"></i>Apache Spark, Kafka experience</li>
+                                <li><i class="fa fa-check text-primary me-2"></i>Cloud platforms (AWS/Azure/GCP)</li>
+                            </ul>
+                        </div>
+                        <div class="mb-3">
+                            <h6>Hiring Process:</h6>
+                            <ol>
+                                <li>Resume & Portfolio Review (2-3 days)</li>
+                                <li>Coding Challenge (Data Engineering)</li>
+                                <li>System Design Interview</li>
+                                <li>Technical Deep Dive Session</li>
+                                <li>Team Interaction & Final Decision</li>
+                            </ol>
+                        </div>
+                        <span class="text-primary fw-bold">₹7-11 LPA</span>
+                    </div>
+                </div>
+
+                <!-- Junior Developer Position -->
+                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="service-item border rounded p-4 h-100">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fa fa-code fa-3x text-primary me-4"></i>
+                            <div>
+                                <h4 class="mb-1">Junior Full Stack Developer</h4>
+                                <span class="text-muted">Full-time • Experience: 0-2 years</span>
+                            </div>
+                        </div>
+                        <p class="mb-3">Develop and maintain web applications, work with modern frameworks and collaborate with cross-functional teams.</p>
+                        <div class="mb-3">
+                            <h6>Requirements:</h6>
+                            <ul class="list-unstyled">
+                                <li><i class="fa fa-check text-primary me-2"></i>Computer Science/IT degree</li>
+                                <li><i class="fa fa-check text-primary me-2"></i>JavaScript, React, Node.js</li>
+                                <li><i class="fa fa-check text-primary me-2"></i>HTML, CSS, Bootstrap</li>
+                                <li><i class="fa fa-check text-primary me-2"></i>Database knowledge (MySQL/MongoDB)</li>
+                            </ul>
+                        </div>
+                        <div class="mb-3">
+                            <h6>Hiring Process:</h6>
+                            <ol>
+                                <li>Application & Academic Review (2-3 days)</li>
+                                <li>Online Coding Test</li>
+                                <li>Technical Interview (Programming)</li>
+                                <li>Project Discussion & Live Coding</li>
+                                <li>HR Round & Onboarding</li>
+                            </ol>
+                        </div>
+                        <span class="text-primary fw-bold">₹4-6 LPA</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Application Form -->
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="bg-light border rounded p-5 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="text-center mx-auto mb-5" style="max-width: 600px;">
+                            <h1 class="display-6 mb-4">Apply Now</h1>
+                            <p>Ready to join our team? Fill out the application form below and we'll get back to you soon!</p>
+                        </div>
+                        <form id="jobApplicationForm">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="fullName" placeholder="Full Name" required>
+                                        <label for="fullName">Full Name *</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control" id="email" placeholder="Email" required>
+                                        <label for="email">Email *</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="tel" class="form-control" id="phone" placeholder="Phone" required>
+                                        <label for="phone">Phone Number *</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <select class="form-select" id="position" required>
+                                            <option value="">Select Position</option>
+                                            <option value="Senior Data Scientist">Senior Data Scientist</option>
+                                            <option value="Business Intelligence Analyst">Business Intelligence Analyst</option>
+                                            <option value="Data Engineer">Data Engineer</option>
+                                            <option value="Junior Full Stack Developer">Junior Full Stack Developer</option>
+                                        </select>
+                                        <label for="position">Position Applied For *</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="experience" placeholder="Experience">
+                                        <label for="experience">Years of Experience</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="currentSalary" placeholder="Current Salary">
+                                        <label for="currentSalary">Current/Expected Salary (LPA)</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="education" placeholder="Education" required>
+                                        <label for="education">Education *</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="url" class="form-control" id="portfolio" placeholder="Portfolio/LinkedIn">
+                                        <label for="portfolio">Portfolio/LinkedIn URL</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <textarea class="form-control" placeholder="Skills" id="skills" style="height: 100px" required></textarea>
+                                        <label for="skills">Key Skills *</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <textarea class="form-control" placeholder="Cover Letter" id="coverLetter" style="height: 150px"></textarea>
+                                        <label for="coverLetter">Cover Letter / Why do you want to join us?</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+                                        <label class="form-check-label" for="agreeTerms">
+                                            I agree to the <a href="#" class="text-primary">Terms and Conditions</a> and <a href="#" class="text-primary">Privacy Policy</a> *
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-12 text-center">
+                                    <button class="btn btn-primary w-100 py-3" type="submit">Submit Application</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Login Button -->
+            <div class="text-center mt-5">
+                <a href="admin-login.html" class="btn btn-outline-primary">Admin Portal</a>
+            </div>
+        </div>
+    </div>
+    <!-- Join Us End -->
+
+    <!-- Footer Start -->
+    <!-- Footer Start -->
+    <div class="container-fluid footer mt-5 text-light wow fadeIn" data-wow-delay="0.1s">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <h3 class="mb-3">Satyam Suman</h3>
+                    <p class="mb-3">Full Stack Developer & Data Analytics Expert - Transforming ideas into digital reality with innovative solutions.</p>
+                    <div class="contact-info">
+                        <p class="d-flex align-items-center"><i class="fas fa-map-marker-alt me-3 text-warning"></i>Patna, Bihar, India</p>
+                        <p class="d-flex align-items-center"><i class="fas fa-phone-alt me-3 text-warning"></i>+91 8227027353</p>
+                        <p class="d-flex align-items-center"><i class="fas fa-envelope me-3 text-warning"></i>satyamsuman2003@gmail.com</p>
+                    </div>
+                    <div class="d-flex flex-wrap pt-2">
+                        <a class="btn btn-outline-light btn-social" href="https://github.com/SATYAMSUMAN24" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="https://www.linkedin.com/in/satyamsuman2003/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="https://www.instagram.com/satyamsuman6349/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="https://twitter.com/" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-3">Our Services</h5>
+                    <div class="footer-links">
+                        <a class="btn btn-link text-light" href="service.html"><i class="fas fa-chart-line me-2"></i>Data Analytics</a>
+                        <a class="btn btn-link text-light" href="service.html"><i class="fas fa-tachometer-alt me-2"></i>Business Intelligence</a>
+                        <a class="btn btn-link text-light" href="service.html"><i class="fas fa-database me-2"></i>Data Engineering</a>
+                        <a class="btn btn-link text-light" href="service.html"><i class="fas fa-robot me-2"></i>AI & ML</a>
+                        <a class="btn btn-link text-light" href="service.html"><i class="fas fa-code me-2"></i>Web Development</a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-3">Quick Links</h5>
+                    <div class="footer-links">
+                        <a class="btn btn-link text-light" href="index.html"><i class="fas fa-home me-2"></i>Home</a>
+                        <a class="btn btn-link text-light" href="about.html"><i class="fas fa-info-circle me-2"></i>About</a>
+                        <a class="btn btn-link text-light" href="contact.html"><i class="fas fa-phone me-2"></i>Contact</a>
+                        <a class="btn btn-link text-light" href="join-us.html"><i class="fas fa-users me-2"></i>Careers</a>
+                        <a class="btn btn-link text-light" href="blog.html"><i class="fas fa-blog me-2"></i>Blog</a>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <h5 class="mb-3">Pages</h5>
+                    <div class="footer-links">
+                        <a class="btn btn-link text-light" href="project.html"><i class="fas fa-briefcase me-2"></i>Projects</a>
+                        <a class="btn btn-link text-light" href="feature.html"><i class="fas fa-star me-2"></i>Features</a>
+                        <a class="btn btn-link text-light" href="team.html"><i class="fas fa-users me-2"></i>Team</a>
+                        <a class="btn btn-link text-light" href="testimonial.html"><i class="fas fa-quote-left me-2"></i>Testimonials</a>
+                        <a class="btn btn-link text-light" href="terms-conditions.html"><i class="fas fa-file-contract me-2"></i>Terms & Conditions</a>
+                        <a class="btn btn-link text-light" href="privacy-policy.html"><i class="fas fa-shield-alt me-2"></i>Privacy Policy</a>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-12">
+                    <div class="newsletter-section">
+                        <h5 class="mb-3">Newsletter</h5>
+                        <p class="mb-3">Stay updated with our latest insights and innovations.</p>
+                        <div class="position-relative">
+                            <input class="form-control w-100" type="email" placeholder="Your email" id="newsletter-email" aria-label="Email for newsletter">
+                            <button type="button" class="btn btn-warning position-absolute" onclick="subscribeNewsletter()" aria-label="Subscribe to newsletter">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p>&copy; 2025 <strong>Satyam Suman</strong>. All Rights Reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p>Designed with <i class="fas fa-heart text-danger"></i> by <a href="https://github.com/SATYAMSUMAN24" target="_blank" class="text-warning">SATYAM SUMAN</a></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back to Top -->
+
+    <!-- Footer End -->
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i class="bi bi-arrow-up"></i></a>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="lib/wow/wow.min.js"></script>
+    <script src="lib/easing/easing.min.js"></script>
+    <script src="lib/waypoints/waypoints.min.js"></script>
+    <script src="lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="lib/counterup/counterup.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+
+    <!-- EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+    <!-- Job Application Form Script -->
+    <script>
+        // Initialize EmailJS
+        emailjs.init('q1gxJ3G4BqM9leKk8');
+
+        document.getElementById('jobApplicationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get form data
+            const formData = {
+                name: document.getElementById('fullName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                position: document.getElementById('position').value,
+                experience: document.getElementById('experience').value,
+                currentSalary: document.getElementById('currentSalary').value,
+                education: document.getElementById('education').value,
+                portfolio: document.getElementById('portfolio').value,
+                skills: document.getElementById('skills').value,
+                coverLetter: document.getElementById('coverLetter').value,
+                form_type: 'Job Application',
+                timestamp: new Date().toLocaleString()
+            };
+
+            // Create formatted message for email
+            const emailData = {
+                ...formData,
+                message: `
+                Position Applied: ${formData.position}
+                Experience: ${formData.experience} years
+                Education: ${formData.education}
+                Expected Salary: ${formData.currentSalary} LPA
+                Portfolio: ${formData.portfolio}
+                Skills: ${formData.skills}
+                Cover Letter: ${formData.coverLetter}
+                `
+            };
+
+            // Send email using EmailJS
+            emailjs.send('service_n27wqfr', 'template_42ndqz9', emailData)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+
+                    // Store in localStorage for admin panel
+                    let applications = JSON.parse(localStorage.getItem('jobApplications')) || [];
+                    applications.push({...formData, fullName: formData.name, timestamp: new Date().toISOString()});
+                    localStorage.setItem('jobApplications', JSON.stringify(applications));
+
+                    // Show success message
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Application Submitted Successfully!',
+                        html: `
+                            <p>Thank you <strong>${formData.name}</strong> for applying!</p>
+                            <p>Your application for <strong>${formData.position}</strong> has been received.</p>
+                            <p>We will review your application and get back to you within 3-5 business days at <strong>${formData.email}</strong></p>
+                            <p>Application ID: <strong>#APP${Date.now()}</strong></p>
+                        `,
+                        confirmButtonText: 'Great!',
+                        confirmButtonColor: '#355EFC'
+                    });
+
+                    // Reset form
+                    document.getElementById('jobApplicationForm').reset();
+                }, function(error) {
+                    console.log('FAILED...', error);
+
+                    // Show error message
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong! Please try again.',
+                        confirmButtonColor: '#355EFC'
+                    });
+                });
+        });
+    </script>
+
+    <!-- Enhanced Quick Navigation Widget -->
+    <div id="quick-nav" class="position-fixed" style="top: 50%; right: 20px; transform: translateY(-50%); z-index: 1040;">
+        <div class="bg-white rounded-3 shadow-lg p-2" style="width: 65px;">
+            <!-- Toggle Button -->
+            <button class="quick-nav-toggle d-flex align-items-center justify-content-center mb-2 w-100" 
+                    onclick="toggleQuickNav()" 
+                    title="Quick Navigation" 
+                    data-bs-toggle="tooltip">
+                <i class="fas fa-bars" id="quickNavIcon"></i>
+            </button>
+            
+            <!-- Navigation Menu -->
+            <div class="quick-nav-menu" id="quickNavMenu">
+                <div class="d-flex flex-column gap-2">
+                    <a href="index.html" class="btn btn-sm btn-outline-primary rounded-circle p-2" title="Home" data-bs-toggle="tooltip">
+                        <i class="fas fa-home"></i>
+                    </a>
+                    <a href="about.html" class="btn btn-sm btn-outline-info rounded-circle p-2" title="About" data-bs-toggle="tooltip">
+                        <i class="fas fa-user"></i>
+                    </a>
+                    <a href="service.html" class="btn btn-sm btn-outline-warning rounded-circle p-2" title="Services" data-bs-toggle="tooltip">
+                        <i class="fas fa-cogs"></i>
+                    </a>
+                    <a href="project.html" class="btn btn-sm btn-outline-primary rounded-circle p-2" title="Projects" data-bs-toggle="tooltip">
+                        <i class="fas fa-briefcase"></i>
+                    </a>
+                    <a href="feature.html" class="btn btn-sm btn-outline-success rounded-circle p-2" title="Features" data-bs-toggle="tooltip">
+                        <i class="fas fa-star"></i>
+                    </a>
+                    <a href="team.html" class="btn btn-sm btn-outline-secondary rounded-circle p-2" title="Team" data-bs-toggle="tooltip">
+                        <i class="fas fa-users"></i>
+                    </a>
+                    <a href="testimonial.html" class="btn btn-sm btn-outline-danger rounded-circle p-2" title="Testimonials" data-bs-toggle="tooltip">
+                        <i class="fas fa-quote-left"></i>
+                    </a>
+                    <a href="blog.html" class="btn btn-sm btn-outline-dark rounded-circle p-2" title="Blog" data-bs-toggle="tooltip">
+                        <i class="fas fa-blog"></i>
+                    </a>
+                    <a href="contact.html" class="btn btn-sm btn-outline-danger rounded-circle p-2" title="Contact" data-bs-toggle="tooltip">
+                        <i class="fas fa-phone"></i>
+                    </a>
+                    
+                    <!-- Social Links -->
+                    <hr class="my-2">
+                    <a href="#" class="btn btn-sm btn-outline-success rounded-circle p-2" title="WhatsApp" data-bs-toggle="tooltip" onclick="window.open('https://wa.me/918227027353', '_blank')">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="#" class="btn btn-sm btn-outline-info rounded-circle p-2" title="LinkedIn" data-bs-toggle="tooltip" onclick="window.open('https://www.linkedin.com/in/satyamsuman2003/', '_blank')">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="btn btn-sm btn-outline-dark rounded-circle p-2" title="GitHub" data-bs-toggle="tooltip" onclick="window.open('https://github.com/SATYAMSUMAN24', '_blank')">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    
+                    <!-- Utility Actions -->
+                    <hr class="my-2">
+                    <a href="#" class="btn btn-sm btn-outline-secondary rounded-circle p-2" title="Back to Top" data-bs-toggle="tooltip" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+                        <i class="fas fa-arrow-up"></i>
+                    </a>
+                    <a href="join-us.html" class="btn btn-sm btn-warning rounded-circle p-2" title="Join Us" data-bs-toggle="tooltip">
+                        <i class="fas fa-user-plus"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Navigation Toggle Script -->
+    <script>
+        function toggleQuickNav() {
+            const menu = document.getElementById('quickNavMenu');
+            const icon = document.getElementById('quickNavIcon');
+            
+            if (menu.classList.contains('show')) {
+                menu.classList.remove('show');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            } else {
+                menu.classList.add('show');
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            }
+        }
+    </script>
+
+    <!-- Initialize tooltips -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+        });
+    </script>
+
+   
+</body>
+
+</html>
