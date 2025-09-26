@@ -1,7 +1,7 @@
 /* Enhanced Floating AI Assistant Styles */
 .ai-chat-widget {
     position: fixed;
-    bottom: 20px;
+    bottom: 80px;
     left: 20px;
     z-index: 1000;
     font-family: 'Inter', 'Open Sans', sans-serif;
