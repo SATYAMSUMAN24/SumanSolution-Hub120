@@ -297,8 +297,9 @@
 /* Mobile Responsive */
 @media (max-width: 768px) {
     .ai-chat-widget {
-        bottom: 15px;
-        right: 15px;
+        bottom: 70px;
+        left: 20px;
+        right: auto;
     }
 
     .chat-container {
@@ -306,10 +307,10 @@
         max-width: 350px;
         height: 70vh;
         max-height: 500px;
-        bottom: 70px;
+        bottom: 140px;
         right: 0;
-        left: 50%;
-        transform: translateX(-50%);
+        left: 15px;
+        transform: none;
     }
 
     .chat-toggle {
